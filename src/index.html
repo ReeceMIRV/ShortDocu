@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShortDocu</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="renderer.js" defer></script>
+    <script src="textEditor.js" defer></script>
+    <script src="settings.js" defer></script>
+    <script src="menus.js" defer></script>
+    <script src="buildShrtct.js" defer></script>
+
+    <!--Code mirror dependencies... Javascript Library-->
+    <script src="codemirror-5.62.2/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/lib/codemirror.css">
+    <script src="codemirror-5.62.2/mode/javascript/javascript.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/theme/darcula-modified.css">
+
+    <script src="codemirror-5.62.2/addon/selection/active-line.js"></script>
+    <script src="codemirror-5.62.2/addon/comment/comment.js"></script>
+    <script src="codemirror-5.62.2/addon/edit/closebrackets.js"></script>
+    <script src="codemirror-5.62.2/addon/edit/matchbrackets.js"></script>
+
+    <link rel="stylesheet" href="codemirror-5.62.2/addon/scroll/simplescrollbars.css">
+    <script src="codemirror-5.62.2/addon/scroll/simplescrollbars.js"></script>
+
+    <script src="codemirror-5.62.2/addon/hint/javascript-hint.js"></script>
+    <script src="codemirror-5.62.2/addon/hint/show-hint.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/addon/hint/show-hint.css">
+
+    <script src="codemirror-5.62.2/addon/search/match-highlighter.js"></script>
+
+    <script src="codemirror-5.62.2/addon/search/search.js"></script>
+    <script src="codemirror-5.62.2/addon/search/searchcursor.js"></script>
+    <script src="codemirror-5.62.2/addon/dialog/dialog.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/addon/dialog/dialog.css">
+    <script src="codemirror-5.62.2/addon/search/jump-to-line.js"></script>
+
+    <script src="codemirror-5.62.2/addon/scroll/annotatescrollbar.js"></script>
+    <script src="codemirror-5.62.2/addon/search/matchesonscrollbar.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/addon/search/matchesonscrollbar.css">
+
+    <script src="codemirror-5.62.2/keymap/sublime.js"></script>
+
+    <!--Have not yet implemented-->
+    <!-- <script src="codemirror-5.62.2/addon/merge/merge.js"></script>
+    <link rel="stylesheet" href="codemirror-5.62.2/addon/merge/merge.css"> -->
+
+  </head>
+
+  <body id="body">
+      <nav id="menu">
+        <ul tabindex="1">
+  
+          <li>File
+            <div class="submenu">
+              <ul>
+                <li onclick="openFile()">Open File</li>
+                <li onclick="lastWorkspace()">Last Work...</li>
+                <li onclick="saveWorkspace()">Save Work...</li>
+                <li onclick="saveAs()">Save As...</li>
+                <li onclick="autoSave()">Auto Save</li>
+                <li onclick="settings()">Settings</li>
+                <li onclick="closeApp()">Exit</li>
+              </ul>
+            </div>
+          </li>
+  
+          <li>Edit
+            <div class="submenu">
+              <ul>
+                <li onclick="undo()">Undo</li>
+                <li onclick="redo()">Redo</li>
+                <li onclick="cut()">Cut</li>
+                <li onclick="copy()">Copy</li>
+                <li onclick="paste()">Paste</li>
+              </ul>
+            </div>
+          </li>
+  
+          <li>Share
+            <div class="submenu">
+              <ul>
+                <li onclick="createShortcut()">Compile Shortcut</li> 
+                <li onclick="uploadShortcut()">Upload Shortcut</li>
+                <li onclick="emailShortcut()">Email Shortcut</li>
+              </ul>
+            </div>
+          </li>
+          
+          <li>Style
+            <div class="submenu">
+              <ul>
+                <li onclick="setTheme()">Set Theme</li>
+                <li onclick="setFontSize()">Set Font Size</li>
+                <li onclick="toggleBanner()">Toggle Alert Banner</li>
+                <li onclick="toggleRightColumn()">Toggle Right Column</li>
+                <li onclick="toggleSaveBlock()">Toggle Save Block</li>
+                <li onclick="toggleCompileBlock()">Toggle Compile Block</li>
+                <li onclick="toggleFullScreen()">Toggle All Elements</li>
+              </ul>
+            </div>
+          </li>
+
+          <li>Tools
+            <div class="submenu">
+              <ul>
+                <!-- <li onclick="getEditor()">Get Editor Content</li> -->
+                <li onclick="toggleDevTools()">Toggle Dev Tools</li>
+                <li onclick="refreshApp()">Refresh Application</li>
+              </ul>
+            </div>
+          </li>
+            
+          <li>Help
+            <div class="submenu">
+              <ul>
+                <li onclick="moreInfo()">More Information</li>
+                <li onclick="shortJSDoc()">Shortcut JS Documentation</li>
+                <!-- <li onclick="shortJSDoc()">CodeMirror Docu</li>
+                <li onclick="shortJSDoc()">Javascript Docu</li>
+                <li onclick="shortJSDoc()">Electron Docu</li> -->
+              </ul>
+            </div>
+          </li>
+
+          <li>+
+            <div class="submenu">
+              <ul>
+                <li onclick="Run()">Run with JS</li>
+                <li onclick="find()">Find Text</li>
+                <li onclick="replace()">Replace</li>
+                <li onclick="replaceAll()">Replace All</li>
+                <hr>
+              </ul>
+            </div>
+          </li>
+
+          <li>+
+            <div class="submenu alwaysHover">
+              <ul>
+                <li onclick="toggleComment()">Comment</li>
+                <li onclick="selectLine()">Select Line</li>
+                <li onclick="deleteLine()">Delete Line</li>
+                <li onclick="indentLess()">Indent Less</li>
+                <li onclick="indentMore()">Indent More</li>
+                <li onclick="moveLineUp()">Move Line Up</li>
+                <li onclick="moveLineDown()">Move Line Down</li>
+                <li onclick="copyLineDown()">Copy Line Down</li>
+              </ul>
+            </div>
+          </li>
+          
+        </ul>
+      </nav>
+
+      <div>
+        <ul id="main-context-menu" class="context-menu">
+          <li onclick="createSnippet()">Create Snippet</li>
+          <hr>
+          <li onclick="cut()">Cut</li>
+          <li onclick="copy()">Copy</li>
+          <li onclick="paste()">Paste</li>
+          <li onclick="toggleComment()">Comment</li>
+        </ul>
+      </div>
+
+      <div>
+        <ul id="sub-context-menu" class="context-menu">
+          <li onclick="howToUse()">How To Use</li>
+          <hr>
+          <li onclick="copyInnerHtml()">Copy Snippet</li>
+          <li onclick="createSnippet()">Create Snippet</li>
+          <li onclick="deleteSnippet()">Delete Snippet</li>
+        </ul>
+      </div>
+
+      <div id="banner">
+        <span id="alert">></span>
+        <span id="user-input" contenteditable="true"></span>
+        <button id="input-enter" onclick="hideInput()">Enter</button>
+      </div>
+
+      <div id="workspace-container">
+        <textarea id="left-column"></textarea>
+  
+        <div id="right-column">
+            <input id="searchFilter" placeholder=" Type here to search..." onkeyup="filter()"></input>
+
+            <div id="snippet-container"><!--Snippet li elements end up inside this container--></div>
+        </div>
+      </div>
+      
+      <div id="bottom">
+        <div id="save-block">
+          <p>Upload Workspace File To Text Editor:</p>
+          <input id="file-upload-btn" type="file" name="filename" onchange="findFile()"/>
+          <button id="last-workspace" onclick="lastWorkspace()">Last Workspace</button>
+        </div>
+    
+        <div id="compile-block">
+          <p>Compile Textarea: </p>
+          <input type="text" id="shortcut-name" placeholder="ShortcutName" value="ShortcutName">
+          <input type="text" id="directory" placeholder="C:/Users/JohnDoe/Desktop">
+    
+          <button onclick="createShortcut()">Compile Shortcut</button>
+        </div>
+      </div>
+
+  </body>
+</html>

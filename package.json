@@ -1,0 +1,19 @@
+{
+  "name": "shortdocu",
+  "version": "1.0.0",
+  "description": "An application with all ShortcutJS documentation with an intuitive GUI interface resembling the IOS Shortcuts Application",
+  "main": "main.js",
+  "dependencies": {
+    "@joshfarrant/shortcuts-js": "^0.6.0",
+    "install": "^0.13.0",
+    "npm": "^7.20.2"
+  },
+  "devDependencies": {
+    "electron": "^13.1.7"
+  },
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Reece_mmi",
+  "license": "ISC"
+}
